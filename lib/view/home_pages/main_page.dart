@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:newblog/controller/blog_conteroller.dart';
 import 'package:newblog/view/home_pages/details/detail_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -12,6 +14,12 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   
+@override
+  void initState() {
+    Get.find<BlogController>().getBlog();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -36,50 +44,53 @@ class Blogs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GridView.builder(
-       shrinkWrap: true,
-       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-         crossAxisSpacing: 5,
-         childAspectRatio: 1/1.3,
-         crossAxisCount: 2,
-         ),
-       itemBuilder: (context,index){
-         return Container(
-           margin: EdgeInsets.all(5),
-           child: Column(
-             crossAxisAlignment: CrossAxisAlignment.start,
-             children: [
-               GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                    return Details();
-                  }));
-                },
-                 child: Container(
-                   height: 160,
-                   decoration: BoxDecoration(
-                     borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
-                     image: DecorationImage(image: 
-                     AssetImage("assets/images/ban.png"),fit: BoxFit.cover)
+    return GetBuilder<BlogController>(
+      builder: (blog) {
+        return Expanded(
+          child: GridView.builder(
+           shrinkWrap: true,
+           itemCount: blog.blogModel.length,
+           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+             crossAxisSpacing: 5,
+             childAspectRatio: 1/1.3,
+             crossAxisCount: 2,
+             ),
+           itemBuilder: (context,index){
+             return Container(
+               margin: EdgeInsets.all(5),
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                   GestureDetector(
+                    onTap: (){
+                         Get.to(Details(blogDetail: blog.blogModel[index],));
+                    },
+                     child: Container(
+                       height: 160,
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
+                         image: DecorationImage(image: 
+                         NetworkImage(blog.blogModel[index].image.toString()),fit: BoxFit.cover)
+                       ),
+                     ),
                    ),
-                 ),
+                   SizedBox(height: 5,),
+                   CustomText(name: blog.blogModel[index].category!.title.toString(), color: Colors.grey, size: 18, weight: FontWeight.normal),
+                   Container(
+                     width: size.width*0.45,
+                     child: Align(
+                       alignment: Alignment.topLeft,
+                       child: CustomText(name: blog.blogModel[index].title.toString(),
+                                                     align: TextAlign.start,
+                        color: Colors.black, size: 17, weight: FontWeight.w700,maxLine: 2,),
+                     ),
+                   )
+                 ],
                ),
-               SizedBox(height: 5,),
-               CustomText(name: "Motivation", color: Colors.grey, size: 18, weight: FontWeight.normal),
-               Container(
-                 width: size.width*0.45,
-                 child: Align(
-                   alignment: Alignment.topLeft,
-                   child: CustomText(name: "Success Steps For Personal and Business Life",
-                                                 align: TextAlign.start,
-                    color: Colors.black, size: 17, weight: FontWeight.w700,maxLine: 2,),
-                 ),
-               )
-             ],
-           ),
-         );
-       }),
+             );
+           }),
+        );
+      }
     );
   }
 }
@@ -101,7 +112,7 @@ class _TopPartState extends State<TopPart> {
   @override
   Widget build(BuildContext context) {
     return  Container(
-              height: widget.size.height*0.38,
+              height: widget.size.height*0.42,
               width: widget.size.width,
               child: Stack(
                 children: [

@@ -1,8 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:newblog/model/blog_model.dart';
+
 import 'package:newblog/view/home_pages/main_page.dart';
 
 class Details extends StatefulWidget {
-  const Details({super.key});
+ var blogDetail;
+   Details({
+    Key? key,
+    required this.blogDetail,
+  }) : super(key: key);
+ 
 
   @override
   State<Details> createState() => _DetailsState();
@@ -16,8 +24,8 @@ class _DetailsState extends State<Details> {
       body: Container(
         child: Column(
           children: [
-            DetailsTop(size: size),
-            DetailsBottom(size: size)
+            DetailsTop(size: size,blogDetails: widget.blogDetail,),
+            DetailsBottom(size: size,blogDetail: widget.blogDetail,)
           ],
         ),
       ),
@@ -28,11 +36,12 @@ class _DetailsState extends State<Details> {
 
 //details bottom
 class DetailsBottom extends StatefulWidget {
-  const DetailsBottom({
+   DetailsBottom({
     super.key,
     required this.size,
+    required this.blogDetail
   });
-
+  BlogModel blogDetail;
   final Size size;
 
   @override
@@ -69,19 +78,25 @@ class _DetailsBottomState extends State<DetailsBottom> {
             Expanded(
               child: TabBarView(
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(name: "Success Steps For Your Personal Life", color: Colors.black, size: 17, weight: FontWeight.bold)
-                          ,SizedBox(height: 5,),
-                        CustomText(
-                          align: TextAlign.start,
-                          maxLine: 18,
-                          name: "The success of your life depends on yourself as conducted by theresearch of the university on yourself as conducted by theresearch of the university on yourself as conducted by theresearch of the university on yourself as conducted by theresearch of the university on yourself as conducted by theresearch of the university on yourself as conducted by theresearch of the university on yourself as conducted by theresearch of the university on yourself as conducted by theresearch of the university on yourself as conducted by theresearch of the university on yourself as conducted by theresearch of the university on yourself as conducted by theresearch of the university  on yourself as conducted by theresearch of the university of penselveniya.The data shows that the quality of life depends on all the things you", color: Colors.black, size: 17, weight: FontWeight.normal)
-
-                          ],
+                    SingleChildScrollView(
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(name: widget.blogDetail.title.toString(), color: Colors.black, size: 17, weight: FontWeight.bold)
+                            ,SizedBox(height: 5,),
+                          CustomText(
+                            size: 14,
+                            weight: FontWeight.normal,
+                            color: Colors.black,
+                            align: TextAlign.start,
+                            maxLine: 18,
+                            name: widget.blogDetail.description.toString()
+                            )
+                    
+                            ],
+                        ),
                       ),
                     ),
                     Icon(Icons.directions_transit, size: 350,color: Colors.blue,),
@@ -98,11 +113,12 @@ class _DetailsBottomState extends State<DetailsBottom> {
 
 //details top
 class DetailsTop extends StatelessWidget {
-  const DetailsTop({
+   DetailsTop({
     super.key,
     required this.size,
+    required this.blogDetails,
   });
-
+  BlogModel blogDetails;
   final Size size;
 
   @override
@@ -113,7 +129,7 @@ class DetailsTop extends StatelessWidget {
       width: size.width,
       decoration: BoxDecoration(
         image: DecorationImage(image: 
-        AssetImage("assets/images/ban.png"),fit: BoxFit.cover)
+        NetworkImage(blogDetails.image.toString()),fit: BoxFit.cover)
       ),
       child: SafeArea(
         child: Row(
