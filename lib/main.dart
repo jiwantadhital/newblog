@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newblog/controller/blog_conteroller.dart';
+import 'package:newblog/databases/sqlite/blog_data.dart';
+import 'package:newblog/databases/sqlite/local_controller/blog_controller.dart';
 import 'package:newblog/view/splash_screen.dart';
 
 void main() {

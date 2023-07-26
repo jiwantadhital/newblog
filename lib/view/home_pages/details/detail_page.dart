@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:newblog/databases/sqlite/loca_model/blog_local_model.dart';
 import 'package:newblog/model/blog_model.dart';
 
 import 'package:newblog/view/home_pages/main_page.dart';
@@ -161,7 +162,17 @@ class DetailsTop extends StatelessWidget {
                 border: Border.all(color: Colors.white,width: 2)
               ),
                child: Center(
-                child: Icon(Icons.download,color: Colors.white,),
+                child: GestureDetector(
+                  onTap: (){
+                    // var datas = BlogModelDatabase(
+                    //   title: blogDetails.title ?? "No Data",
+                    //    desc: blogDetails.description ??"No data",
+                    //     catid: blogDetails.category!.id??0,
+                    //      image: image,
+                    //       cattitle: cattitle
+                    //       );
+                  },
+                  child: Icon(Icons.download,color: Colors.white,)),
               ),
             ),
           ],

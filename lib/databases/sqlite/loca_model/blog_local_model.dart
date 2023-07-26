@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 
+import 'package:newblog/databases/sqlite/data_types.dart';
+
+String tableBlog = "blogs";
 class BlogFields{
 
 static final List<String> values = [id,title,desc,catid,image,cattitle];
@@ -68,4 +71,17 @@ Map<String,Object?> toJson()=>{
   BlogFields.cattitle:cattitle
 
 };
+
+static String tableCreation = '''
+CREATE TABLE $tableBlog(
+  ${BlogFields.id} $idType,
+  ${BlogFields.title} $textType,
+  ${BlogFields.desc} $textType,
+  ${BlogFields.catid} $integerTpe,
+  ${BlogFields.image} $textType,
+  ${BlogFields.cattitle} $textType
+)
+''';
+
+
 }
