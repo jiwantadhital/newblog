@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:newblog/databases/sqlite/loca_model/blog_local_model.dart';
+import 'package:newblog/databases/sqlite/local_controller/blog_controller.dart';
 import 'package:newblog/model/blog_model.dart';
 
 import 'package:newblog/view/home_pages/main_page.dart';
@@ -18,6 +20,12 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
+
+  @override
+  void initState() {
+   Get.find<BlogTableController>().getBlogs();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -153,27 +161,40 @@ class DetailsTop extends StatelessWidget {
                   child: Icon(Icons.arrow_back,color: Colors.white,)),
               ),
             ),
-            Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                color: Colors.deepPurple,
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white,width: 2)
-              ),
-               child: Center(
-                child: GestureDetector(
-                  onTap: (){
-                    // var datas = BlogModelDatabase(
-                    //   title: blogDetails.title ?? "No Data",
-                    //    desc: blogDetails.description ??"No data",
-                    //     catid: blogDetails.category!.id??0,
-                    //      image: image,
-                    //       cattitle: cattitle
-                    //       );
-                  },
-                  child: Icon(Icons.download,color: Colors.white,)),
-              ),
+            GetBuilder<BlogTableController>(
+              builder: (blogs) {
+                return Container(
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurple,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.white,width: 2)
+                  ),
+                   child: Center(
+                    child: GestureDetector(
+                      onTap: (){
+                        if(blogs.blogDatas.map((e) => e.title).contains(blogDetails.title)){
+                          print("Already");
+                        }
+                        else{
+                    var data = BlogModelDatabase(
+                      title: blogDetails.title??"",
+                       desc: blogDetails.description??"",
+                        catid: blogDetails.catId??0,
+                         image: blogDetails.image??"",
+                          cattitle: blogDetails.category!.title??""
+                          );
+                          blogs.saveBlogs(data).then((value)  {
+                                 Get.find<BlogTableController>().getBlogs();
+                          });
+                          }
+                       
+                      },
+                      child:blogs.blogDatas.map((e) => e.title).contains(blogDetails.title)?  Icon(Icons.check,color: Colors.white,):Icon(Icons.download,color: Colors.white,)),
+                  ),
+                );
+              }
             ),
           ],
         ),

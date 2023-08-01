@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newblog/controller/blog_conteroller.dart';
 import 'package:newblog/databases/sqlite/blog_data.dart';
+import 'package:newblog/databases/sqlite/loca_model/blog_local_model.dart';
 import 'package:newblog/databases/sqlite/local_controller/blog_controller.dart';
 import 'package:newblog/view/splash_screen.dart';
 
@@ -15,15 +16,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(()=>BlogController());
-    return GetBuilder<BlogController>(
+     Get.lazyPut(()=>BlogTableController(blogDatabase: BlogDatabase.instance));
+    return GetBuilder<BlogTableController>(
       builder: (_) {
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home:  SplashScreen(),
+        return GetBuilder<BlogController>(
+          builder: (_) {
+            return GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              home:  SplashScreen(),
+            );
+          }
         );
       }
     );

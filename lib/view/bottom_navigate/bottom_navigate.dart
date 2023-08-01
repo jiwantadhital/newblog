@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:newblog/view/home_pages/main_page.dart';
+import 'package:newblog/view/search/search.dart';
+import 'package:newblog/view/settings/setting.dart';
 
 class BottomBarApp extends StatefulWidget {
   const BottomBarApp({super.key});
@@ -19,10 +21,10 @@ MainPage(),
     child: Center(child: Text("Category")),
   ),
   Container(
-    child: Center(child: Text("search")),
+    child: SearchPage(),
   ),
    Container(
-    child: Center(child: Text("setting")),
+    child: Settings()
   ),
 ];
 
