@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:newblog/controller/blog_conteroller.dart';
+import 'package:newblog/dependencies/constants.dart';
 import 'package:newblog/model/blog_model.dart';
 import 'package:newblog/view/home_pages/details/detail_page.dart';
 import 'package:newblog/view/home_pages/main_page.dart';
@@ -85,7 +86,7 @@ else{
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(image: 
-                              NetworkImage(blogDatas[index].image.toString()),fit: BoxFit.cover)
+                              NetworkImage("${Constants.apiValue}/public/uploads/images/Blog/${blogDatas[index].image.toString()}"),fit: BoxFit.cover)
                             ),
                           ),
                           Container(

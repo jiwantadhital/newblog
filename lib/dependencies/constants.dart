@@ -1,3 +1,3 @@
 class Constants{
-  static const apiValue = "http://10.0.2.2:8000/";
+  static const apiValue = "https://forstudents678.xyz/";
 }

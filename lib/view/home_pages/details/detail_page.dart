@@ -139,7 +139,7 @@ class DetailsTop extends StatelessWidget {
       width: size.width,
       decoration: BoxDecoration(
         image: DecorationImage(image: 
-        NetworkImage("${Constants.apiValue}uploads/images/Blog/${blogDetails.image.toString()}"),fit: BoxFit.cover)
+        NetworkImage("${Constants.apiValue}/public/uploads/images/Blog/${blogDetails.image.toString()}"),fit: BoxFit.cover)
       ),
       child: SafeArea(
         child: Row(

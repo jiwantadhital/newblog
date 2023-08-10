@@ -71,7 +71,7 @@ class Blogs extends StatelessWidget {
                        decoration: BoxDecoration(
                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
                          image: DecorationImage(image: 
-                         NetworkImage("${Constants.apiValue}uploads/images/Blog/${blog.blogModel[index].image.toString()}"),fit: BoxFit.cover)
+                         NetworkImage("${Constants.apiValue}/public/uploads/images/Blog/${blog.blogModel[index].image.toString()}"),fit: BoxFit.cover)
                        ),
                      ),
                    ),

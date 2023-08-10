@@ -10,7 +10,7 @@ class BlogController extends GetxController{
 
 
 Future<void> getBlog()async{
-var response = await http.get(Uri.parse("${Constants.apiValue}api/getBlog"));
+var response = await http.get(Uri.parse("${Constants.apiValue}api/getBlogs"));
 if(response.statusCode == 200){
 blogModel = [];
 var responseData = jsonDecode(response.body);
