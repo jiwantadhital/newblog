@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newblog/databases/sqlite/loca_model/blog_local_model.dart';
 import 'package:newblog/databases/sqlite/local_controller/blog_controller.dart';
+import 'package:newblog/dependencies/constants.dart';
 import 'package:newblog/model/blog_model.dart';
 
 import 'package:newblog/view/home_pages/main_page.dart';
@@ -138,7 +139,7 @@ class DetailsTop extends StatelessWidget {
       width: size.width,
       decoration: BoxDecoration(
         image: DecorationImage(image: 
-        NetworkImage(blogDetails.image.toString()),fit: BoxFit.cover)
+        NetworkImage("${Constants.apiValue}uploads/images/Blog/${blogDetails.image.toString()}"),fit: BoxFit.cover)
       ),
       child: SafeArea(
         child: Row(

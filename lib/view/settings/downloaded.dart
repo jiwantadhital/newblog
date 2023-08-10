@@ -79,7 +79,12 @@ class _DownloadedState extends State<Downloaded> {
                     child: Center(
                       child: GestureDetector(
                         onTap: (){
-                         
+                        blog.deleteBlog(blog.blogDatas[index].id).then((value) {
+                          blog.getBlogs();
+                          setState(() {
+                            
+                          });
+                         });
                         },
                         child: Icon(Icons.delete,color: Colors.white,)),
                     ),

@@ -3,6 +3,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newblog/controller/blog_conteroller.dart';
+import 'package:newblog/dependencies/constants.dart';
 import 'package:newblog/view/home_pages/details/detail_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -70,7 +71,7 @@ class Blogs extends StatelessWidget {
                        decoration: BoxDecoration(
                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
                          image: DecorationImage(image: 
-                         NetworkImage(blog.blogModel[index].image.toString()),fit: BoxFit.cover)
+                         NetworkImage("${Constants.apiValue}uploads/images/Blog/${blog.blogModel[index].image.toString()}"),fit: BoxFit.cover)
                        ),
                      ),
                    ),

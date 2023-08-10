@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:newblog/dependencies/constants.dart';
 import 'package:newblog/model/blog_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,7 +10,7 @@ class BlogController extends GetxController{
 
 
 Future<void> getBlog()async{
-var response = await http.get(Uri.parse("https://mocki.io/v1/83c09209-c301-4336-b262-7fbd600dfe25"));
+var response = await http.get(Uri.parse("${Constants.apiValue}api/getBlog"));
 if(response.statusCode == 200){
 blogModel = [];
 var responseData = jsonDecode(response.body);
