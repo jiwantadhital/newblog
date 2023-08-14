@@ -7,7 +7,9 @@ import 'package:http/http.dart' as http;
 
 class AddBlogController extends GetxController{
 
-Future<bool> addBlog(title,description, image)async{
+
+
+Future<bool> addBlog(title,description, image,categories)async{
   var url = Uri.parse("${Constants.apiValue}api/addblogs");
 var response = await http.MultipartRequest(
   'POST',
@@ -15,7 +17,7 @@ var response = await http.MultipartRequest(
 );
 response.fields['title'] = title.toString();
 response.fields['description'] = description.toString();
-response.fields['cat_id'] = 2.toString();
+response.fields['cat_id'] = categories.toString();
 
 http.MultipartFile multipartFile  = await http.MultipartFile.fromPath(
   'image_file',

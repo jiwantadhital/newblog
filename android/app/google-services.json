@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "459417578776",
+    "project_id": "newblog-2831f",
+    "storage_bucket": "newblog-2831f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459417578776:android:773a2e909938c20b50026d",
+        "android_client_info": {
+          "package_name": "com.app.newblog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459417578776-n1tpj60oau8iitrq681a1fa5safis63j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy61I8OMbkGo7o_g_DMkyjyLE7NmWcNqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "459417578776-n1tpj60oau8iitrq681a1fa5safis63j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

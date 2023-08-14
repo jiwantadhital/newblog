@@ -17,9 +17,17 @@ class Categories extends StatefulWidget {
 
 class _CategoriesState extends State<Categories> {
   int currentIndex  = 0;
+  refresh(){
+    Future.delayed(Duration(seconds: 1),(){
+      Get.find<CatController>().getBlogByCat(id: Get.find<CatController>().catModel[0].id);
+      setState(() {
+        
+      });
+    });
+  }
   @override
   void initState() {
-      Get.find<CatController>().getBlogByCat(id: Get.find<CatController>().catModel[0].id);
+      refresh();
     super.initState();
   }
   @override
@@ -77,7 +85,7 @@ class _CategoriesState extends State<Categories> {
       body: GetBuilder<CatController>(
       builder: (cat) {
 
-        return Container(
+        return cat.blogLoading==true?Center(child: CircularProgressIndicator()): Container(
           height: size.height,
           width: size.width,
           child: GridView.builder(

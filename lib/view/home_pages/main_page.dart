@@ -1,9 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newblog/controller/blog_conteroller.dart';
 import 'package:newblog/dependencies/constants.dart';
+import 'package:newblog/notification/local_notification.dart';
 import 'package:newblog/view/home_pages/details/detail_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -18,6 +20,32 @@ class _MainPageState extends State<MainPage> {
 @override
   void initState() {
     Get.find<BlogController>().getBlog();
+    
+    FirebaseMessaging.instance.getInitialMessage().then(
+      (message) {
+        if (message != null) {
+          if (message.notification!.body != null) {
+
+          }
+        }
+      },
+    );
+    FirebaseMessaging.onMessage.listen(
+      (message) {
+        print("FirebaseMessaging.onMessage.listen");
+        if (message.notification != null) {
+          print(message.notification!.title);
+          LocalNotificationService.createanddisplaynotification(message);
+        }
+      },
+    );
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (message) {
+
+        if (message.notification != null) {
+        }
+      },
+    );
     super.initState();
   }
 
